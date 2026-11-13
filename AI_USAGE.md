@@ -21,6 +21,7 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 3 | 2026-11-13 | `backend/app/routers/auth.py`, `backend/app/schemas.py` (`LoginRequest`, `LoginResponse`), `backend/app/errors.py`, `backend/app/main.py` | Ya | Belum ada | Endpoint login, format error `{message, errors}`, dan handler validasi berbahasa Indonesia. |
 | 4 | 2026-11-13 | `backend/app/routers/entities.py`, `backend/app/entity_utils.py` | Ya | Belum ada | Daftar entitas master, fallback snapshot riwayat, ID sintetis `hist:`, label tipe, dan anti-duplikat. |
 | 4 | 2026-11-13 | `backend/app/routers/activities.py`, `backend/app/schemas.py` (`ActivityCreate`, `ActivityItem`, `ActivitySummary`) | Ya | Belum ada | GET dengan filter SQL + ringkasan, POST dari master/riwayat, PATCH status dengan aturan kepemilikan. |
+| 5 | 2026-11-13 | `backend/pytest.ini`, `backend/tests/conftest.py`, `backend/tests/test_auth.py`, `backend/tests/test_activities.py`, `backend/tests/test_entities.py` | Ya | Belum ada | 25 tes: auth, filter inklusif/kombinasi, validasi POST, kepemilikan PATCH, fallback entitas, dedup/label, ringkasan. Database test terpisah `visitflow_test`. |
 
 ## Rekap manual Adit
 
