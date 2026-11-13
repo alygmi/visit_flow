@@ -73,22 +73,21 @@ def _resolve_entity(
         )
     return entity.id, entity.name, entity.type, entity.region
 
-
 @router.get("/api/activities", response_model=ActivityListResponse)
 def list_activities(
-    db: DbSession,
-    current_user: CurrentUser,
-    segment: Segment | None = Query(default=None),
-    status: ActivityStatus | None = Query(default=None),
-    date_from: date | None = Query(default=None, alias="from"),
-    date_to: date | None = Query(default=None, alias="to"),
-    search: str | None = Query(default=None),
-) -> ActivityListResponse:
+    db:DbSession,
+    current_user:CurrentUser,
+    segment:Segment | None = Query(default=None),
+    status:ActivityStatus | None = Query(default=None),
+    date_from:date | None = Query(default=None, alias="start"),
+    date_to:date | None = Query(default=None, alias="end"),
+    search:str | None = Query(default=None)
+    ) -> ActivityListResponse:
     if date_from and date_to and date_from > date_to:
         api_error(
             400,
-            "Tanggal mulai tidak boleh setelah tanggal akhir.",
-            {"from": "Tanggal mulai tidak boleh setelah tanggal akhir."},
+            "Tanggal mulai tidak valid.",
+            {"start": "Tanggal mulai tidak valid."},
         )
 
     filters = []
@@ -111,7 +110,7 @@ def list_activities(
         .order_by(
             Activity.visit_date.desc(),
             Activity.created_at.desc(),
-            Activity.id.desc(),
+            Activity.id.desc()
         )
     ).all()
 

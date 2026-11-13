@@ -79,9 +79,9 @@ export default function FilterBar({ filters, onChange, onReset }) {
           </label>
           <input
             id="filter-from"
-            name="from"
+            name="start"
             type="date"
-            value={filters.from}
+            value={filters.start}
             onChange={update}
             className={inputClass}
           />
@@ -96,9 +96,9 @@ export default function FilterBar({ filters, onChange, onReset }) {
           </label>
           <input
             id="filter-to"
-            name="to"
+            name="end"
             type="date"
-            value={filters.to}
+            value={filters.end}
             onChange={update}
             className={inputClass}
           />

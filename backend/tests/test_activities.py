@@ -16,7 +16,7 @@ def test_date_filter_is_inclusive(client, auth, make_activity):
 
     response = client.get(
         "/api/activities",
-        params={"from": "2026-03-01", "to": "2026-03-31"},
+        params={"start": "2026-03-01", "end": "2026-03-31"},
         headers=auth(),
     )
 
@@ -62,8 +62,8 @@ def test_combined_filters_are_applied_in_sql(client, auth, make_activity):
         params={
             "segment": "B2G",
             "status": "VISITED",
-            "from": "2026-03-01",
-            "to": "2026-03-31",
+            "start": "2026-03-01",
+            "end": "2026-03-31",
             "search": "melati",
         },
         headers=auth(),
@@ -78,14 +78,14 @@ def test_combined_filters_are_applied_in_sql(client, auth, make_activity):
 def test_from_after_to_returns_400(client, auth, reset_data):
     response = client.get(
         "/api/activities",
-        params={"from": "2026-03-31", "to": "2026-03-01"},
+        params={"start": "2026-03-31", "end": "2026-03-01"},
         headers=auth(),
     )
 
     assert response.status_code == 400
     body = response.json()
-    assert body["message"] == "Tanggal mulai tidak boleh setelah tanggal akhir."
-    assert "from" in body["errors"]
+    assert body["message"] == "Tanggal mulai tidak valid."
+    assert "start" in body["errors"]
 
 
 def test_post_requires_required_fields(client, auth, reset_data):

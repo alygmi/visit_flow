@@ -140,16 +140,16 @@ Semua endpoint data (selain login dan health check) memerlukan header `Authoriza
 | --- | --- | --- |
 | `POST` | `/api/auth/login` | Login, mengembalikan token dan data user. |
 | `GET` | `/api/entities` | Opsi entitas, filter `segment` dan `search`. |
-| `GET` | `/api/activities` | Daftar kunjungan + ringkasan, filter `segment`, `status`, `from`, `to`, `search`. |
+| `GET` | `/api/activities` | Daftar kunjungan + ringkasan, filter `segment`, `status`, `start`, `end`, `search`. |
 | `POST` | `/api/activities` | Tambah kunjungan baru; `salesId` selalu diambil dari token. |
 | `PATCH` | `/api/activities/{id}` | Ubah status; hanya pemilik kunjungan (403 untuk lainnya). |
 | `GET` | `/health` | Health check. |
 
 Catatan filter:
 
-- `from` dan `to` inklusif terhadap tanggal batas.
+- `start` dan `end` inklusif terhadap tanggal batas.
 - `search` memakai `ILIKE` pada nama entitas.
-- `from` setelah `to` menghasilkan `400`.
+- `start` setelah `end` menghasilkan `400`.
 - Ringkasan (`total`, `visited`, `notVisited`) dihitung dari hasil filter yang sama dengan daftar item.
 
 Format error konsisten:
@@ -168,7 +168,7 @@ Format error konsisten:
 - Status awal kunjungan baru adalah `NOT_VISITED`.
 - PATCH status hanya boleh dilakukan pemilik kunjungan; UI hanya menampilkan tombol untuk item dengan `canEdit: true`.
 - Filter segmen, status, rentang tanggal, dan pencarian dijalankan di query SQL, bukan difilter di browser.
-- Tanggal `from`/`to` inklusif.
+- Tanggal `start`/`end` inklusif.
 - Pencarian nama memakai `ILIKE` (case-insensitive, partial match).
 - Ringkasan selalu konsisten dengan item yang dikembalikan.
 - Entitas master dan riwayat:
@@ -195,7 +195,7 @@ Hasil saat ini: **25 passed**. Cakupan tes:
 
 - login sukses/gagal, token wajib, token tidak valid;
 - penolakan `salesId` dari body;
-- filter tanggal inklusif, kombinasi filter, dan validasi `from > to`;
+- filter tanggal inklusif, kombinasi filter, dan validasi `start > end`;
 - validasi POST (field wajib, tanggal tidak valid, segmen tidak valid, entitas tidak dikenal, segmen tidak cocok);
 - identitas sales dari token;
 - PATCH oleh pemilik vs non-pemilik, 404, dan status tidak valid;
@@ -219,6 +219,7 @@ npm run build
 - **Fallback riwayat berbasis pencarian.** Master tetap menjadi sumber utama; snapshot riwayat hanya muncul bila hasil master untuk filter tersebut kosong, sehingga opsi master dan riwayat tidak tercampur.
 - **Error dalam bahasa Indonesia** dengan bentuk `{message, errors}` agar frontend dapat menampilkan pesan per field.
 - **Tanpa pagination.** Belum diminta pada spesifikasi; volume data prototype masih kecil.
+- **Nama parameter `start`/`end`.** Contoh kontrak pada spesifikasi memakai `from`/`to`. Karena `from` adalah keyword Python, backend tetap memakai `alias`; prototype ini memilih `start`/`end` agar nama parameter konsisten di backend, frontend, tes, dan dokumentasi. Untuk kembali ke contoh spesifikasi, cukup ubah dua `alias` di `list_activities` beserta pemanggilnya di frontend, tes, dan README.
 - **Token di `localStorage`.** Sederhana untuk prototype; frontend memeriksa masa berlaku token dan logout otomatis saat menerima `401`. Tidak ada data kunjungan yang disimpan di browser; `localStorage` hanya menyimpan sesi, sedangkan seluruh data kunjungan dan entitas berasal dari API/PostgreSQL.
 
 ## Keterbatasan
@@ -246,7 +247,7 @@ Perintah di atas menghapus volume database. Alternatif tanpa menghapus volume: k
 
 ## Penggunaan AI
 
-Seluruh kode dan dokumentasi prototype ini dibuat dengan bantuan AI: **100% berdasarkan 17 entri log (17 dibuat AI, 0 manual)**. Belum ada perubahan manual yang tercatat.
+Sebagian besar kode dan dokumentasi prototype ini dibuat dengan bantuan AI: **90% berdasarkan 20 entri log (18 AI, 2 manual)**. Secara jumlah baris, perubahan manual masih sekitar 1%; angka 90/10 dihitung per entri perubahan agar kontribusi manual tetap tercatat tanpa mengklaim porsi baris yang lebih besar.
 
 | Area | File/fungsi yang menggunakan AI |
 | --- | --- |

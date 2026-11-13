@@ -12,8 +12,8 @@ const INITIAL_FILTERS = {
   search: "",
   segment: "",
   status: "",
-  from: "",
-  to: "",
+  start: "",
+  end: "",
 };
 
 const EMPTY_SUMMARY = { total: 0, visited: 0, notVisited: 0 };
@@ -49,8 +49,8 @@ export default function VisitFlowPage() {
       if (debouncedSearch) params.set("search", debouncedSearch);
       if (filters.segment) params.set("segment", filters.segment);
       if (filters.status) params.set("status", filters.status);
-      if (filters.from) params.set("from", filters.from);
-      if (filters.to) params.set("to", filters.to);
+      if (filters.start) params.set("start", filters.start);
+      if (filters.end) params.set("end", filters.end);
       const query = params.toString();
 
       try {
@@ -73,8 +73,8 @@ export default function VisitFlowPage() {
     debouncedSearch,
     filters.segment,
     filters.status,
-    filters.from,
-    filters.to,
+    filters.start,
+    filters.end,
     reloadToken,
   ]);
 

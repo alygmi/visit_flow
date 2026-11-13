@@ -34,7 +34,7 @@ def list_entities(
                     type=entity.type,
                     segment=entity.segment,
                     region=entity.region,
-                    label=entity_label(entity.name, entity.type),
+                    label=entity_label(entity.name, entity.type)
                 )
                 for entity in entities
             ]
@@ -45,12 +45,12 @@ def list_entities(
         Activity.entity_name,
         Activity.entity_type,
         Activity.segment,
-        Activity.entity_region,
+        Activity.entity_region
     ).group_by(
         Activity.entity_name,
         Activity.entity_type,
         Activity.segment,
-        Activity.entity_region,
+        Activity.entity_region
     )
     if segment:
         history_stmt = history_stmt.where(Activity.segment == segment)
@@ -77,7 +77,7 @@ def list_entities(
                 type=entity_type,
                 segment=row_segment,
                 region=region,
-                label=entity_label(name, entity_type),
+                label=entity_label(name, entity_type)
             )
         )
 

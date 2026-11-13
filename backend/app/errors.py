@@ -16,8 +16,8 @@ FIELD_LABELS = {
     "status": "status",
     "username": "username",
     "password": "password",
-    "from": "from",
-    "to": "to",
+    "start": "start",
+    "end": "end",
     "search": "search",
 }
 

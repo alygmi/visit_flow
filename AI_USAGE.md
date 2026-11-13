@@ -35,7 +35,8 @@ Bagian ini diisi saat Adit meninjau atau mengubah kode. Jika belum ada perubahan
 
 | File / fungsi | Perubahan manual | Tanggal |
 | --- | --- | --- |
-| - | - | - |
+| `backend/app/routers/activities.py`, `backend/app/routers/entities.py` | Merapikan penulisan query (trailing comma, spasi) tanpa mengubah perilaku; sempat menambahkan query alternatif sebagai komentar lalu menghapusnya. | 2026-11-13 |
+| `backend/app/routers/activities.py` (`alias`, pesan error), `backend/app/errors.py` (`FIELD_LABELS`), `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/FilterBar.jsx`, `backend/tests/test_activities.py`, `README.md` | Mengganti parameter filter `from`/`to` menjadi `start`/`end` secara menyeluruh: query param, state frontend, input tanggal, tes, dan dokumentasi. | 2026-11-13 |
 
 ## Rekap akhir
 
@@ -43,8 +44,8 @@ Perhitungan dilakukan dari jumlah entri pada tabel catatan per tahap di atas, bu
 
 | Kategori | Jumlah entri | Persentase |
 | --- | --- | --- |
-| Dibuat/diubah dengan AI | 17 | 100% |
-| Ditulis/diubah manual oleh Adit | 0 | 0% |
-| **Total** | **17** | **100%** |
+| Dibuat/diubah dengan AI | 18 | 90% |
+| Ditulis/diubah manual oleh Adit | 2 | 10% |
+| **Total** | **20** | **100%** |
 
-Artinya: seluruh kode dan dokumentasi pada prototype ini dibuat dengan bantuan AI, dan belum ada perubahan manual yang tercatat. Bila Adit meninjau atau mengubah bagian tertentu, tambahkan barisnya ke tabel rekap manual dan hitung ulang persentase dari total entri yang baru. Jangan mengisi kolom manual tanpa perubahan yang benar-benar dilakukan.
+Persentase dihitung **per entri perubahan**, bukan per baris kode: 18 entri AI dibanding 2 entri manual. Secara jumlah baris, perubahan manual saat ini sekitar **1%** dari total baris kode, karena rename parameter hanya menyentuh sebagian kecil baris. Dua angka itu ditulis apa adanya supaya tidak melebih-lebihkan: 10% berasal dari metode per entri, bukan klaim porsi baris. Bila Adit mengubah bagian lain, tambahkan barisnya ke tabel rekap manual dan hitung ulang persentase dari total entri yang baru. Jangan mengisi kolom manual tanpa perubahan yang benar-benar dilakukan.
