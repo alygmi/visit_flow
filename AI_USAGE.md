@@ -24,6 +24,7 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 5 | 2026-11-13 | `backend/pytest.ini`, `backend/tests/conftest.py`, `backend/tests/test_auth.py`, `backend/tests/test_activities.py`, `backend/tests/test_entities.py` | Ya | Belum ada | 25 tes: auth, filter inklusif/kombinasi, validasi POST, kepemilikan PATCH, fallback entitas, dedup/label, ringkasan. Database test terpisah `visitflow_test`. |
 | 6 | 2026-11-13 | `frontend/src/api/client.js`, `frontend/src/auth/AuthContext.jsx`, `frontend/src/components/ProtectedRoute.jsx`, `frontend/src/pages/LoginPage.jsx` | Ya | Belum ada | Fetch wrapper tipis, token di localStorage, proteksi rute, dan logout saat 401/token kedaluwarsa. |
 | 6 | 2026-11-13 | `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/FilterBar.jsx`, `SummaryCards.jsx`, `ActivityTable.jsx`, `Badges.jsx`, `States.jsx`, `frontend/src/App.jsx` | Ya | Belum ada | Tabel kunjungan, filter server-side dengan debounce, ringkasan, loading/error/empty state. |
+| 7 | 2026-11-13 | `frontend/src/components/AddActivityModal.jsx`, `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/ActivityTable.jsx` | Ya | Belum ada | Form tambah kunjungan dengan dropdown entitas per segmen, validasi frontend/backend, tombol status hanya untuk `canEdit`, refresh tabel dan ringkasan dari API. |
 
 ## Rekap manual Adit
 

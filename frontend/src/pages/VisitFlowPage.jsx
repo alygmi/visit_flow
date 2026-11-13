@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
 import ActivityTable from "../components/ActivityTable";
+import AddActivityModal from "../components/AddActivityModal";
 import FilterBar from "../components/FilterBar";
 import { EmptyState, ErrorState, LoadingState } from "../components/States";
 import SummaryCards from "../components/SummaryCards";
@@ -25,6 +26,9 @@ export default function VisitFlowPage() {
   const [loadState, setLoadState] = useState("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [reloadToken, setReloadToken] = useState(0);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [pendingId, setPendingId] = useState(null);
+  const [actionError, setActionError] = useState("");
 
   useEffect(() => {
     const timer = window.setTimeout(
@@ -76,11 +80,39 @@ export default function VisitFlowPage() {
 
   function updateFilter(name, value) {
     setFilters((current) => ({ ...current, [name]: value }));
+    setActionError("");
   }
 
   function resetFilters() {
     setFilters(INITIAL_FILTERS);
     setDebouncedSearch("");
+    setActionError("");
+  }
+
+  function refresh() {
+    setActionError("");
+    setReloadToken((token) => token + 1);
+  }
+
+  async function handleToggleStatus(item) {
+    setActionError("");
+    setPendingId(item.id);
+    const nextStatus =
+      item.status === "VISITED" ? "NOT_VISITED" : "VISITED";
+
+    try {
+      await api.patch(`/activities/${item.id}`, { status: nextStatus });
+      refresh();
+    } catch (error) {
+      setActionError(error.message);
+    } finally {
+      setPendingId(null);
+    }
+  }
+
+  function handleCreated() {
+    setModalOpen(false);
+    refresh();
   }
 
   const loading = loadState === "loading";
@@ -116,13 +148,22 @@ export default function VisitFlowPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        <div>
-          <h1 className="text-2xl font-semibold text-slate-900">
-            Daftar Kunjungan
-          </h1>
-          <p className="mt-1 text-sm text-slate-500">
-            Pantau rencana dan hasil kunjungan tim sales ke entitas.
-          </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-slate-900">
+              Daftar Kunjungan
+            </h1>
+            <p className="mt-1 text-sm text-slate-500">
+              Pantau rencana dan hasil kunjungan tim sales ke entitas.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700"
+          >
+            + Tambah Kunjungan
+          </button>
         </div>
 
         <SummaryCards summary={data.summary} loading={loading} />
@@ -133,12 +174,18 @@ export default function VisitFlowPage() {
           onReset={resetFilters}
         />
 
+        {actionError && (
+          <p
+            role="alert"
+            className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            {actionError}
+          </p>
+        )}
+
         <section className="mt-6" aria-live="polite">
           {loadState === "error" ? (
-            <ErrorState
-              message={errorMessage}
-              onRetry={() => setReloadToken((token) => token + 1)}
-            />
+            <ErrorState message={errorMessage} onRetry={refresh} />
           ) : loading ? (
             <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
               <LoadingState />
@@ -148,10 +195,21 @@ export default function VisitFlowPage() {
               <EmptyState />
             </div>
           ) : (
-            <ActivityTable items={data.items} />
+            <ActivityTable
+              items={data.items}
+              onToggleStatus={handleToggleStatus}
+              pendingId={pendingId}
+            />
           )}
         </section>
       </main>
+
+      <AddActivityModal
+        open={isModalOpen}
+        defaultSegment={filters.segment}
+        onClose={() => setModalOpen(false)}
+        onCreated={handleCreated}
+      />
     </div>
   );
 }
