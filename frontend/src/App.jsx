@@ -1,10 +1,25 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+
+import { AuthProvider } from "./auth/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LoginPage from "./pages/LoginPage";
+import VisitFlowPage from "./pages/VisitFlowPage";
+
 export default function App() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-6">
-      <div className="rounded-xl bg-white p-8 shadow-sm">
-        <h1 className="text-2xl font-semibold text-slate-900">Visit Flow</h1>
-        <p className="mt-2 text-sm text-slate-600">Kerangka aplikasi siap dikembangkan.</p>
-      </div>
-    </main>
+    <AuthProvider>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <VisitFlowPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AuthProvider>
   );
 }
