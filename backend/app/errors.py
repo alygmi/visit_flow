@@ -40,7 +40,7 @@ def _indonesian_message(error: dict) -> str:
     loc = error.get("loc", ())
     field = str(loc[-1]) if loc else ""
 
-    if error_type == "missing":
+    if error_type in {"missing", "string_too_short"}:
         return "Wajib diisi."
     if error_type == "literal_error":
         if field == "status":

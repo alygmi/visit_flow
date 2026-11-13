@@ -19,6 +19,8 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 2 | 2026-11-13 | `backend/app/seed.py` | Ya | Belum ada | Seed idempotent: 3 sales, 14 entitas, 20 kunjungan master, 4 kunjungan riwayat. |
 | 3 | 2026-11-13 | `backend/app/security.py` (`create_access_token`, `decode_access_token`), `backend/app/deps.py` (`get_current_user`) | Ya | Belum ada | JWT PyJWT, masa berlaku token, dan dependency identitas dari token. |
 | 3 | 2026-11-13 | `backend/app/routers/auth.py`, `backend/app/schemas.py` (`LoginRequest`, `LoginResponse`), `backend/app/errors.py`, `backend/app/main.py` | Ya | Belum ada | Endpoint login, format error `{message, errors}`, dan handler validasi berbahasa Indonesia. |
+| 4 | 2026-11-13 | `backend/app/routers/entities.py`, `backend/app/entity_utils.py` | Ya | Belum ada | Daftar entitas master, fallback snapshot riwayat, ID sintetis `hist:`, label tipe, dan anti-duplikat. |
+| 4 | 2026-11-13 | `backend/app/routers/activities.py`, `backend/app/schemas.py` (`ActivityCreate`, `ActivityItem`, `ActivitySummary`) | Ya | Belum ada | GET dengan filter SQL + ringkasan, POST dari master/riwayat, PATCH status dengan aturan kepemilikan. |
 
 ## Rekap manual Adit
 
