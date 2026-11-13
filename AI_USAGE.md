@@ -17,6 +17,8 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 2 | 2026-11-13 | `backend/app/models.py` (`User`, `Entity`, `Activity`), `backend/app/security.py` (`hash_password`, `verify_password`) | Ya | Belum ada | Model SQLAlchemy 2.x, snapshot entitas, CHECK constraint segmen/status, dan hashing password. |
 | 2 | 2026-11-13 | `backend/alembic.ini`, `backend/alembic/env.py`, `backend/alembic/versions/0001_initial_schema.py` | Ya | Belum ada | Migrasi awal tabel users, entities, activities beserta index dan foreign key. |
 | 2 | 2026-11-13 | `backend/app/seed.py` | Ya | Belum ada | Seed idempotent: 3 sales, 14 entitas, 20 kunjungan master, 4 kunjungan riwayat. |
+| 3 | 2026-11-13 | `backend/app/security.py` (`create_access_token`, `decode_access_token`), `backend/app/deps.py` (`get_current_user`) | Ya | Belum ada | JWT PyJWT, masa berlaku token, dan dependency identitas dari token. |
+| 3 | 2026-11-13 | `backend/app/routers/auth.py`, `backend/app/schemas.py` (`LoginRequest`, `LoginResponse`), `backend/app/errors.py`, `backend/app/main.py` | Ya | Belum ada | Endpoint login, format error `{message, errors}`, dan handler validasi berbahasa Indonesia. |
 
 ## Rekap manual Adit
 
