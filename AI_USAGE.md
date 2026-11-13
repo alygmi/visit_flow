@@ -27,6 +27,7 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 7 | 2026-11-13 | `frontend/src/components/AddActivityModal.jsx`, `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/ActivityTable.jsx` | Ya | Belum ada | Form tambah kunjungan dengan dropdown entitas per segmen, validasi frontend/backend, tombol status hanya untuk `canEdit`, refresh tabel dan ringkasan dari API. |
 | 8 | 2026-11-13 | `README.md` | Ya | Belum ada | Dokumentasi cara menjalankan database/backend/frontend, akun demo, ringkasan API, aturan bisnis, tes, keputusan desain, keterbatasan, dan disclosure AI. |
 | 8 | 2026-11-13 | `AI_USAGE.md` | Ya | Belum ada | Penambahan catatan tahap 8 dan rekap persentase akhir berdasarkan log. |
+| Tambahan | 2026-11-13 | `frontend/src/components/States.jsx` (`TableSkeleton`), `frontend/src/components/SummaryCards.jsx`, `frontend/src/pages/VisitFlowPage.jsx` | Ya | Belum ada | Skeleton loading tabel dan ringkasan saat initial load maupun perubahan filter, dengan `aria-busy` dan teks status untuk screen reader. |
 
 ## Rekap manual Adit
 
@@ -42,8 +43,8 @@ Perhitungan dilakukan dari jumlah entri pada tabel catatan per tahap di atas, bu
 
 | Kategori | Jumlah entri | Persentase |
 | --- | --- | --- |
-| Dibuat/diubah dengan AI | 16 | 100% |
+| Dibuat/diubah dengan AI | 17 | 100% |
 | Ditulis/diubah manual oleh Adit | 0 | 0% |
-| **Total** | **16** | **100%** |
+| **Total** | **17** | **100%** |
 
 Artinya: seluruh kode dan dokumentasi pada prototype ini dibuat dengan bantuan AI, dan belum ada perubahan manual yang tercatat. Bila Adit meninjau atau mengubah bagian tertentu, tambahkan barisnya ke tabel rekap manual dan hitung ulang persentase dari total entri yang baru. Jangan mengisi kolom manual tanpa perubahan yang benar-benar dilakukan.

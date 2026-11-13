@@ -18,7 +18,7 @@ const cards = [
 
 export default function SummaryCards({ summary, loading }) {
   return (
-    <section className="mt-6 grid gap-4 sm:grid-cols-3">
+    <section className="mt-6 grid gap-4 sm:grid-cols-3" aria-busy={loading}>
       {cards.map((card) => (
         <div
           key={card.key}
@@ -32,9 +32,16 @@ export default function SummaryCards({ summary, loading }) {
               #
             </span>
           </div>
-          <p className="mt-3 text-3xl font-semibold text-slate-900">
-            {loading || !summary ? "—" : summary[card.key]}
-          </p>
+          {loading || !summary ? (
+            <div
+              className="mt-3 h-9 w-16 animate-pulse rounded bg-slate-200"
+              aria-hidden="true"
+            />
+          ) : (
+            <p className="mt-3 text-3xl font-semibold text-slate-900">
+              {summary[card.key]}
+            </p>
+          )}
           <p className="mt-1 text-xs text-slate-400">kunjungan</p>
         </div>
       ))}

@@ -5,7 +5,7 @@ import { useAuth } from "../auth/AuthContext";
 import ActivityTable from "../components/ActivityTable";
 import AddActivityModal from "../components/AddActivityModal";
 import FilterBar from "../components/FilterBar";
-import { EmptyState, ErrorState, LoadingState } from "../components/States";
+import { EmptyState, ErrorState, TableSkeleton } from "../components/States";
 import SummaryCards from "../components/SummaryCards";
 
 const INITIAL_FILTERS = {
@@ -183,13 +183,11 @@ export default function VisitFlowPage() {
           </p>
         )}
 
-        <section className="mt-6" aria-live="polite">
+        <section className="mt-6" aria-live="polite" aria-busy={loading}>
           {loadState === "error" ? (
             <ErrorState message={errorMessage} onRetry={refresh} />
           ) : loading ? (
-            <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
-              <LoadingState />
-            </div>
+            <TableSkeleton />
           ) : data.items.length === 0 ? (
             <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
               <EmptyState />

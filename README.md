@@ -246,7 +246,7 @@ Perintah di atas menghapus volume database. Alternatif tanpa menghapus volume: k
 
 ## Penggunaan AI
 
-Seluruh kode dan dokumentasi prototype ini dibuat dengan bantuan AI: **100% berdasarkan 16 entri log (16 dibuat AI, 0 manual)**. Belum ada perubahan manual yang tercatat.
+Seluruh kode dan dokumentasi prototype ini dibuat dengan bantuan AI: **100% berdasarkan 17 entri log (17 dibuat AI, 0 manual)**. Belum ada perubahan manual yang tercatat.
 
 | Area | File/fungsi yang menggunakan AI |
 | --- | --- |

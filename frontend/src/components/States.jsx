@@ -1,8 +1,84 @@
-export function LoadingState() {
+const TABLE_HEADERS = [
+  "Entitas",
+  "Segmen",
+  "Wilayah",
+  "Tanggal Kunjungan",
+  "Status",
+  "Sales",
+  "Aksi",
+];
+
+const SKELETON_CELLS = [
+  { width: "w-40", height: "h-4", subWidth: "w-20" },
+  { width: "w-12", height: "h-5", pill: true },
+  { width: "w-20", height: "h-4" },
+  { width: "w-24", height: "h-4" },
+  { width: "w-16", height: "h-5", pill: true },
+  { width: "w-24", height: "h-4" },
+  { width: "w-20", height: "h-4" },
+];
+
+export function TableSkeleton({ rows = 6 }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 px-6 py-16 text-sm text-slate-500">
-      <span className="h-6 w-6 animate-spin rounded-full border-2 border-slate-200 border-t-indigo-600" />
-      Memuat data kunjungan...
+    <div
+      role="status"
+      aria-live="polite"
+      className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+    >
+      <span className="sr-only">Memuat data kunjungan...</span>
+      <div className="overflow-x-auto">
+        <table
+          className="min-w-full divide-y divide-slate-200"
+          aria-hidden="true"
+        >
+          <thead className="bg-slate-50">
+            <tr>
+              {TABLE_HEADERS.map((header, index) => (
+                <th
+                  key={header}
+                  scope="col"
+                  className={`px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500 ${
+                    index === TABLE_HEADERS.length - 1
+                      ? "text-right"
+                      : "text-left"
+                  }`}
+                >
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {Array.from({ length: rows }, (_, rowIndex) => (
+              <tr key={rowIndex} className="animate-pulse">
+                {SKELETON_CELLS.map((cell, cellIndex) => (
+                  <td
+                    key={cellIndex}
+                    className={`px-4 py-4 ${
+                      cellIndex === SKELETON_CELLS.length - 1
+                        ? "text-right"
+                        : ""
+                    }`}
+                  >
+                    <div
+                      className={`${cell.height} ${cell.width} ${
+                        cell.pill ? "rounded-full" : "rounded"
+                      } bg-slate-200 ${
+                        cellIndex === SKELETON_CELLS.length - 1 ? "ml-auto" : ""
+                      }`}
+                    />
+                    {cell.subWidth && (
+                      <div
+                        className={`mt-2 h-3 ${cell.subWidth} rounded bg-slate-100`}
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
