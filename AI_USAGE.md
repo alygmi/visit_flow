@@ -25,6 +25,8 @@ Dokumen ini dicatat sejak awal pengerjaan. Setiap tahap mencatat file/fungsi yan
 | 6 | 2026-11-13 | `frontend/src/api/client.js`, `frontend/src/auth/AuthContext.jsx`, `frontend/src/components/ProtectedRoute.jsx`, `frontend/src/pages/LoginPage.jsx` | Ya | Belum ada | Fetch wrapper tipis, token di localStorage, proteksi rute, dan logout saat 401/token kedaluwarsa. |
 | 6 | 2026-11-13 | `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/FilterBar.jsx`, `SummaryCards.jsx`, `ActivityTable.jsx`, `Badges.jsx`, `States.jsx`, `frontend/src/App.jsx` | Ya | Belum ada | Tabel kunjungan, filter server-side dengan debounce, ringkasan, loading/error/empty state. |
 | 7 | 2026-11-13 | `frontend/src/components/AddActivityModal.jsx`, `frontend/src/pages/VisitFlowPage.jsx`, `frontend/src/components/ActivityTable.jsx` | Ya | Belum ada | Form tambah kunjungan dengan dropdown entitas per segmen, validasi frontend/backend, tombol status hanya untuk `canEdit`, refresh tabel dan ringkasan dari API. |
+| 8 | 2026-11-13 | `README.md` | Ya | Belum ada | Dokumentasi cara menjalankan database/backend/frontend, akun demo, ringkasan API, aturan bisnis, tes, keputusan desain, keterbatasan, dan disclosure AI. |
+| 8 | 2026-11-13 | `AI_USAGE.md` | Ya | Belum ada | Penambahan catatan tahap 8 dan rekap persentase akhir berdasarkan log. |
 
 ## Rekap manual Adit
 
@@ -33,3 +35,15 @@ Bagian ini diisi saat Adit meninjau atau mengubah kode. Jika belum ada perubahan
 | File / fungsi | Perubahan manual | Tanggal |
 | --- | --- | --- |
 | - | - | - |
+
+## Rekap akhir
+
+Perhitungan dilakukan dari jumlah entri pada tabel catatan per tahap di atas, bukan perkiraan terpisah.
+
+| Kategori | Jumlah entri | Persentase |
+| --- | --- | --- |
+| Dibuat/diubah dengan AI | 16 | 100% |
+| Ditulis/diubah manual oleh Adit | 0 | 0% |
+| **Total** | **16** | **100%** |
+
+Artinya: seluruh kode dan dokumentasi pada prototype ini dibuat dengan bantuan AI, dan belum ada perubahan manual yang tercatat. Bila Adit meninjau atau mengubah bagian tertentu, tambahkan barisnya ke tabel rekap manual dan hitung ulang persentase dari total entri yang baru. Jangan mengisi kolom manual tanpa perubahan yang benar-benar dilakukan.
